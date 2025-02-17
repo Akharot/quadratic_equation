@@ -32,16 +32,17 @@ int main() {
     }
     else {
         D = b * b - 4 * a * c;
+        cout << "D = " << D << endl;
 
-        if (D < 0) {
-            cout << "no solution\n";
+        if (fabs(D) < 0.000000001) {
+            cout << "x = " << (-b) / (2 * a) << endl;
         }
         else if (D > 0) {
             cout << "x1 = " << (-b - sqrt(D)) / (2 * a) << endl;
             cout << "x2 = " << (-b + sqrt(D)) / (2 * a) << endl;
         }
         else {
-            cout << "x = " << (-b) / (2 * a) << endl;
+            cout << "no solution\n";
         }
     }
 
