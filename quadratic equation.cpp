@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <cmath>
+#include <fstream>
 
 using namespace std;
 
@@ -7,44 +8,59 @@ int main() {
     float a, b, c;
     float D;
 
-    cout << "a = ";
-    cin >> a;
-    cout << "b = ";
-    cin >> b;
-    cout << "c = ";
-    cin >> c;
+    ifstream inputFile("input.txt");
+    if (!inputFile) {
+        cout << "the file did not open" << endl;
+        return 1;
+    }
+
+    inputFile >> a;
+    inputFile >> b;
+    inputFile >> c;
+
+    inputFile.close();
+
+
+    ofstream outputFile("output.txt");
+    if (!outputFile) {
+        cout << "the file did not open" << endl;
+        return 1;
+    }
+
 
     if (a == 0) {
         if (b == 0) {
             if (c == 0) {
-                cout << "x any\n";
+                outputFile << "x any\n";
             }
             else {
-                cout << "no solution\n";
+                outputFile << "no solution\n";
             }
         }
-        else if (c == 0){
-            cout << "x = 0\n";
+        else if (c == 0) {
+            outputFile << "x = 0\n";
         }
         else {
-            cout << "x = " << -c / b << endl;
+            outputFile << "x = " << -c / b << endl;
         }
     }
     else {
         D = b * b - 4 * a * c;
-        cout << "D = " << D << endl;
+        outputFile << "D = " << D << endl;
 
         if (fabs(D) < 0.000000001) {
-            cout << "x = " << (-b) / (2 * a) << endl;
+            outputFile << "x = " << (-b) / (2 * a) << endl;
         }
         else if (D > 0) {
-            cout << "x1 = " << (-b - sqrt(D)) / (2 * a) << endl;
-            cout << "x2 = " << (-b + sqrt(D)) / (2 * a) << endl;
+            outputFile << "x1 = " << (-b - sqrt(D)) / (2 * a) << endl;
+            outputFile << "x2 = " << (-b + sqrt(D)) / (2 * a) << endl;
         }
         else {
-            cout << "no solution\n";
+            outputFile << "no solution\n";
         }
     }
+
+    outputFile.close();
 
     return 0;
 }
